@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-""" pyhton coding challenge using a bunch of different concepts like prime factorization, greedy algorithms and so on 
-"""
+""" coding challenge using different concepts like prime factorization """
 
 
 def minOperations(n):
-    """ calculates the fewest number of operations needed to result in exactly n H characters in the file. """
+    """ calculates the fewest num to result in exactly n H of characters """
 
     if n <= 1:
         return (0)
