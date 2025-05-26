@@ -4,7 +4,7 @@ import sys
 
 
 def is_safe(row, col, queens):
-    """Check if a queen can be placed at safe postion"""
+    """Check if a queen can be placed"""
     for r, c in queens:
         if c == col or abs(row - r) == abs(col - c):
             return False
@@ -12,7 +12,7 @@ def is_safe(row, col, queens):
 
 
 def solve_nqueens(n, row=0, queens=[], solutions=[]):
-    """Backtracking for the N Queens """
+    """Backtracking solver for N Queens"""
     if row == n:
         solutions.append(queens.copy())
         return
@@ -24,13 +24,13 @@ def solve_nqueens(n, row=0, queens=[], solutions=[]):
 
 
 def main():
-    """parse arguments"""
+    """function to parse arguments"""
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
     try:
         n = int(sys.argv[1])
-    except ValueError:
+    except Exception:
         print("N must be a number")
         sys.exit(1)
     if n < 4:
