@@ -40,4 +40,3 @@ if __name__ == "__main__":
     solve(0, n, [], solutions)
     for sol in solutions:
         print(sol)
-
