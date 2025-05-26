@@ -1,59 +1,48 @@
 #!/usr/bin/python3
-"""N Queens Solution"""
+"""N Queens problem solution for ALX"""
 import sys
 
 
-def print_board(board, n):
-    """Print allocated positions"""
-    b = []
-
-    for i in range(n):
-        for j in range(n):
-            if j == board[i]:
-                b.append([i, j])
-    print(b)
+def is_safe(row, col, queens):
+    """Check if a queen can be placed safe pstion"""
+    for r, c in queens:
+        if c == col or abs(row - r) == abs(col - c):
+            return False
+    return True
 
 
-def is_position_safe(board, i, j, r):
-    """Checks if the position is safe"""
-    return board[i] in (j, j - i + r, i - r + j)
-
-
-def safe_positions(board, row, n):
-    """Find all safe positions for the queen"""
+def solve_nqueens(n, row=0, queens=[], solutions=[]):
+    """Backtracking"""
     if row == n:
-        print_board(board, n)
-
-    else:
-        for j in range(n):
-            allowed = True
-            for i in range(row):
-                if is_position_safe(board, i, j, row):
-                    allowed = False
-            if allowed:
-                board[row] = j
-                safe_positions(board, row + 1, n)
+        solutions.append(queens.copy())
+        return
+    for col in range(n):
+        if is_safe(row, col, queens):
+            queens.append([row, col])
+            solve_nqueens(n, row + 1, queens, solutions)
+            queens.pop()
 
 
-def create_board(size):
-    """Creates the board"""
-    return [0 * size for i in range(size)]
+def main():
+    """parse arguments"""
+    if len(sys.argv) != 2:
+        print("Usage: nqueens N")
+        sys.exit(1)
+    try:
+        n = int(sys.argv[1])
+    except ValueError:
+        print("N must be a number")
+        sys.exit(1)
+    if n < 4:
+        print("N must be at least 4")
+        sys.exit(1)
+
+    solutions = []
+    solve_nqueens(n, solutions=solutions)
+    for solution in solutions:
+        print(solution)
 
 
-if len(sys.argv) != 2:
-    print("Usage: nqueens N")
-    exit(1)
+if __name__ == "__main__":
+    main()
 
-try:
-    n = int(sys.argv[1])
-except BaseException:
-    print("N must be a number")
-    exit(1)
-
-if (n < 4):
-    print("N must be at least 4")
-    exit(1)
-
-board = create_board(int(n))
-row = 0
-safe_positions(board, row, int(n))
