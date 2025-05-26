@@ -1,30 +1,29 @@
 #!/usr/bin/python3
-"""N Queens problem solution"""
+"""N Queens problem Solution"""
 import sys
 
 
 def is_safe(row, col, queens):
-    """Check if a queen can be placed"""
+    """Check if a queen can be placed at a safe postion"""
     for r, c in queens:
         if c == col or abs(row - r) == abs(col - c):
             return False
     return True
 
 
-def solve_nqueens(n, row=0, queens=[], solutions=[]):
-    """Backtracking solver for N Queens"""
+def solve(row, n, queens, solutions):
+    """Recursive backtracking for queens placement"""
     if row == n:
-        solutions.append(queens.copy())
+        solutions.append(queens[:])
         return
     for col in range(n):
         if is_safe(row, col, queens):
             queens.append([row, col])
-            solve_nqueens(n, row + 1, queens, solutions)
+            solve(row + 1, n, queens, solutions)
             queens.pop()
 
 
-def main():
-    """function to parse arguments"""
+if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
@@ -38,10 +37,7 @@ def main():
         sys.exit(1)
 
     solutions = []
-    solve_nqueens(n, solutions=solutions)
-    for solution in solutions:
-        print(solution)
+    solve(0, n, [], solutions)
+    for sol in solutions:
+        print(sol)
 
-
-if __name__ == "__main__":
-    main()
