@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""N Queens problem solution for ALX"""
+"""N Queens problem solution"""
 import sys
 
 
 def is_safe(row, col, queens):
-    """Check if a queen can be placed safe pstion"""
+    """Check if a queen can be placed at safe postion"""
     for r, c in queens:
         if c == col or abs(row - r) == abs(col - c):
             return False
@@ -12,7 +12,7 @@ def is_safe(row, col, queens):
 
 
 def solve_nqueens(n, row=0, queens=[], solutions=[]):
-    """Backtracking"""
+    """Backtracking for the N Queens """
     if row == n:
         solutions.append(queens.copy())
         return
@@ -45,4 +45,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
