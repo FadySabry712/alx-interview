@@ -4,7 +4,7 @@
 
 
 def rotate_2d_matrix(matrix):
-    """Rotates an m by n 2D matrix in place without using another matrix.
+    """Rotates an m by n 2D matrix in place with one matrix.
     """
     if type(matrix) != list:
         return
